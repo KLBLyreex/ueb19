@@ -152,10 +152,14 @@ public class DoppeltVKListe<E> implements List<E> {
         if (size == 0) {
             add(element);
         } else {
-            //TODO: Wenn die Index-Stelle belegt ist kann das Element nicht dahin verschoben werden
-            ListElement<E> neueListe = new ListElement<>(element, le.prev, le);
-
-            le.prev.next = neueListe;
+            ListElement<E> neueListe;
+            if(le.prev == null){
+                neueListe = new ListElement<>(element, null, le);
+                le.next = neueListe;
+            } else {
+                neueListe = new ListElement<>(element, le.prev, le);
+                le.prev.next = neueListe;
+            }
             le.prev = neueListe;
             last = neueListe;
             size++;
@@ -221,7 +225,6 @@ public class DoppeltVKListe<E> implements List<E> {
         }
 
     }
-
 
     /* Hier stehen die Methoden die nicht verwendet werden */
 
