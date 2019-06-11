@@ -21,7 +21,7 @@ public class Test {
     private void run(){
         System.out.println("Gestet wird ob die Liste leer ist: ");
         testeEmpty();
-        System.out.println("Füge Element der Liste hinzu");
+        System.out.println("Fuege Element der Liste hinzu");
         testeAdd("Jon", "Schnee");
         System.out.println("Gib aus wie viele Elemente in der Liste sind: ");
         testeSize();
@@ -29,7 +29,7 @@ public class Test {
         testeRemove();
         System.out.println("Gib aus wie viele Elemente in der Liste sind: ");
         testeSize();
-        System.out.println("Füge Elemente über den Index hinzu (2 Stück)");
+        System.out.println("Füge Elemente über den Index hinzu (2 Stueck)");
         testeAddIndex(0, "Sansa", "Stark");
         testeAddIndex(1, "Arya", "Stark");
         System.out.println("Gib wieder die Anzahl aus: ");
@@ -38,7 +38,7 @@ public class Test {
         testeClear();
         System.out.println("Gib aus wie viele Elemente in der Liste sind: ");
         testeSize();
-        System.out.println("Füge neue Elemente hinzu (5 Stück)");
+        System.out.println("Füge neue Elemente hinzu (5 Stueck)");
         testeAdd("Tyrion", "Lannister");
         testeAdd("Jaime", "Lannister");
         testeAdd("Arya", "Stark");
