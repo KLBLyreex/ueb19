@@ -1,36 +1,59 @@
+import org.omg.CORBA.UNSUPPORTED_POLICY;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 /**
+ * Klasse in der die Doppelt Verkettete Liste generisch Eingefuegt wurde
+ *
  * @author Aaron Betzholz / Jan Ehrhardt
  * @version 10.06.2019
  */
 
 public class DoppeltVKListe<E> implements List<E> {
 
-    private int size = 0;
+    private int size = 0; //Ist immer die aktuelle Laenge der Liste
     private ListElement<E> first = null; //Wird beim Compilieren gesetzt
     private ListElement<E> last = null;
 
     /* Hier stehen die Methoden die verwendet werden */
 
+    /**
+     * @return die aktuelle Laenge der Liste
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * @return true wenn die Liste leer ist
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Prüft ob das uebergebene Objekt in der Liste enthalten ist
+     * @param o das zu pruefende Objekt
+     * @return das Objekt, wenn es in der Liste enthalten ist
+     */
     @Override
     public boolean contains(Object o) {
         return (indexOf(o) > -1);
     }
 
+    /**
+     * Es wird ein Array uebergeben und in das Array
+     * werden die Element der Liste sequentiell eingefuegt
+     *
+     * @param a das uebergebene Array
+     * @param <T> der Typ
+     * @return das gefuellte Array, welches uebergeben wurde
+     */
     @Override
     public <T> T[] toArray(T[] a) {
         int index = 0;
@@ -45,6 +68,12 @@ public class DoppeltVKListe<E> implements List<E> {
         return a;
     }
 
+    /**
+     * Fuegt das uebergeben Element an der Stelle des Index hinzu
+     *
+     * @param index die Stelle an der es hinzugefuegt werden soll
+     * @param element das Element welches in die Liste eingefuegt werden soll
+     */
     @Override
     public void add(int index, E element) {
         if (index < 0 || index > size) {
@@ -58,6 +87,11 @@ public class DoppeltVKListe<E> implements List<E> {
         }
     }
 
+    /**
+     * Fuegt das uebergeben Element der Liste am Ende hinzu
+     * @param e das uebergeben Element
+     * @return True wenn es geklappt hat
+     */
     @Override
     public boolean add(E e) {
         ListElement<E> listeNeu = new ListElement<>(e, null, null);
@@ -75,6 +109,11 @@ public class DoppeltVKListe<E> implements List<E> {
         return true;
     }
 
+    /**
+     * Loescht das Objekt aus der Liste
+     * @param o das zu loeschende Objekt
+     * @return True wenn es geklappt hat
+     */
     @Override
     public boolean remove(Object o) {
         ListElement<E> le = entry(o);
@@ -87,6 +126,11 @@ public class DoppeltVKListe<E> implements List<E> {
         return false;
     }
 
+    /**
+     * Loescht ein Objekt an der Stelle index
+     * @param index die stelle an der das Objekt geloescht werden soll
+     * @return das Objekt welches entfernt wurde
+     */
     @Override
     public E remove(int index) {
         ListElement<E> le = entry(index);
@@ -96,14 +140,22 @@ public class DoppeltVKListe<E> implements List<E> {
         return le.data;
     }
 
+    /**
+     * Fuegt den Inhalt einer Collection der Liste hinzu
+     * @param c die Collection
+     * @return true wenn es geklappt hat
+     */
     @Override
     public boolean addAll(Collection<? extends E> c) {
         for (E element : c) {
             add(element);
         }
-        return false;
+        return true;
     }
 
+    /**
+     * Setzt die gesamte Liste zurueck
+     */
     @Override
     public void clear() {
         first = null;
@@ -111,11 +163,22 @@ public class DoppeltVKListe<E> implements List<E> {
         size = 0;
     }
 
+    /**
+     * Holt ein Element an der Stelle des index
+     * @param index die Stelle an der das Element geholt werden soll
+     * @return das Objekt
+     */
     @Override
     public E get(int index) {
         return entry(index).data;
     }
 
+    /**
+     * Ueberschreibt ein Objekt an der Stelle Index
+     * @param index die Stelle an der das Objekt ueberschrieben werden soll
+     * @param element das neue Objekt
+     * @return das Objekt wenn es geklappt hat
+     */
     @Override
     public E set(int index, E element) {
         ListElement<E> le = entry(index);
@@ -123,6 +186,11 @@ public class DoppeltVKListe<E> implements List<E> {
         return le.data;
     }
 
+    /**
+     * Gibt die Stelle des Objektes aus an der das Objekt in der Liste liegt
+     * @param o das zu suchende Objekt
+     * @return die stelle, wenn -1 dann nicht gefunden
+     */
     @Override
     public int indexOf(Object o) {
         int index = -1;
@@ -144,6 +212,10 @@ public class DoppeltVKListe<E> implements List<E> {
         return index;
     }
 
+    /**
+     * Gibt den Inhalt der Liste als String zurueck
+     * @return String
+     */
     public String toString(){
         StringBuilder sb = new StringBuilder();
         ListElement<E> tmp = first;
@@ -224,6 +296,10 @@ public class DoppeltVKListe<E> implements List<E> {
     /* ######################################################### */
 
 
+    /**
+     * Innere Klasse welche die Doppelt Verkette Liste darstellt
+     * @param <T>
+     */
     private class ListElement<T> {
         private T data;
         private ListElement<T> prev;
@@ -239,53 +315,55 @@ public class DoppeltVKListe<E> implements List<E> {
 
     /* Hier stehen die Methoden die nicht verwendet werden */
 
+    private String NICHTSUPPORTET = "Nicht Supportete Methode";
+
     @Override
     public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Iterator Methode");
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Falsche toArray Methode");
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public ListIterator<E> listIterator() {
-        return null;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return null;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+        throw new UnsupportedOperationException(NICHTSUPPORTET);
     }
 }

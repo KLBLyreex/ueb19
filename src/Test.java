@@ -1,6 +1,12 @@
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author Aaron Betzholz / Jan Ehrhardt
+ * @version 11.06.2019
+ *
+ * Zum Testen der implementierten Methoden von DoppeltVKliste
+ */
 public class Test {
 
     private DoppeltVKListe vkl = new DoppeltVKListe();
@@ -9,6 +15,9 @@ public class Test {
         new Test().run();
     }
 
+    /**
+     * Testet alle implementierten Methoden der DoppeltVKListe
+     */
     private void run(){
         System.out.println("Gestet wird ob die Liste leer ist: ");
         testeEmpty();
