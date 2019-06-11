@@ -144,6 +144,17 @@ public class DoppeltVKListe<E> implements List<E> {
         return index;
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        ListElement<E> tmp = first;
+        while(tmp != null){
+            sb.append(tmp.data);
+            sb.append("\n");
+            tmp = tmp.next;
+        }
+        return sb.toString();
+    }
+
     private void addBefore(E element, ListElement<E> le) {
         if (le == null) {
             throw new RuntimeException("Kein Element in der Liste");
